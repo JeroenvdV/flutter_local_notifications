@@ -438,6 +438,7 @@ public class FlutterLocalNotificationsPlugin
         break;
       }
     }
+    Log.d("flutter_local_not", "!&&&&&&&&&&&&&&&&&&&&&&&&&&& removeNotificationFromCache");
     saveScheduledNotifications(context, scheduledNotifications);
   }
 
@@ -476,6 +477,8 @@ public class FlutterLocalNotificationsPlugin
           pendingIntent);
     }
 
+    Log.d("flutter_local_not", "!&&&&&&&&&&&&&&&&&&&&&&&&&&& scheduleNotification, " + updateScheduledNotificationsCache);
+
     if (updateScheduledNotificationsCache) {
       saveScheduledNotification(context, notificationDetails);
     }
@@ -510,6 +513,8 @@ public class FlutterLocalNotificationsPlugin
       AlarmManagerCompat.setExact(alarmManager, AlarmManager.RTC_WAKEUP, epochMilli, pendingIntent);
     }
 
+    Log.d("flutter_local_not", "!&&&&&&&&&&&&&&&&&&&&&&&&&&& zonedScheduleNotification, " + updateScheduledNotificationsCache);
+
     if (updateScheduledNotificationsCache) {
       saveScheduledNotification(context, notificationDetails);
     }
@@ -529,6 +534,9 @@ public class FlutterLocalNotificationsPlugin
     AlarmManager alarmManager = getAlarmManager(context);
     AlarmManagerCompat.setAlarmClock(
         alarmManager, notificationTriggerTime, pendingIntent, pendingIntent);
+
+    Log.d("flutter_local_not", "!&&&&&&&&&&&&&&&&&&&&&&&&&&& scheduleNextRepeatingNotification");
+
     saveScheduledNotification(context, notificationDetails);
   }
 
@@ -586,6 +594,9 @@ public class FlutterLocalNotificationsPlugin
       alarmManager.setInexactRepeating(
           AlarmManager.RTC_WAKEUP, notificationTriggerTime, repeatInterval, pendingIntent);
     }
+
+    Log.d("flutter_local_not", "!&&&&&&&&&&&&&&&&&&&&&&&&&&& scheduleNextRepeatingNotification, " + updateScheduledNotificationsCache);
+
     if (updateScheduledNotificationsCache) {
       saveScheduledNotification(context, notificationDetails);
     }
@@ -633,6 +644,7 @@ public class FlutterLocalNotificationsPlugin
       scheduledNotificationsToSave.add(scheduledNotification);
     }
     scheduledNotificationsToSave.add(notificationDetails);
+    Log.d("flutter_local_not", "!&&&&&&&&&&&&&&&&&&&&&&&&&&& saveScheduledNotification");
     saveScheduledNotifications(context, scheduledNotificationsToSave);
   }
 
@@ -1596,7 +1608,7 @@ public class FlutterLocalNotificationsPlugin
       AlarmManager alarmManager = getAlarmManager(applicationContext);
       alarmManager.cancel(pendingIntent);
     }
-
+    Log.d("flutter_local_not", "!&&&&&&&&&&&&&&&&&&&&&&&&&&& cancelAllNotifications");
     saveScheduledNotifications(applicationContext, new ArrayList<NotificationDetails>());
     result.success(null);
   }
