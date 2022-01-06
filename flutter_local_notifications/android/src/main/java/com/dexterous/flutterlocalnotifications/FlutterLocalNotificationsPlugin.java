@@ -33,6 +33,7 @@ import androidx.core.app.Person;
 import androidx.core.content.ContextCompat;
 import androidx.core.app.RemoteInput;
 import androidx.core.graphics.drawable.IconCompat;
+import android.util.Log;
 
 import com.dexterous.flutterlocalnotifications.isolate.IsolatePreferences;
 import com.dexterous.flutterlocalnotifications.models.BitmapSource;
@@ -401,6 +402,7 @@ public class FlutterLocalNotificationsPlugin
     SharedPreferences sharedPreferences =
         context.getSharedPreferences(SCHEDULED_NOTIFICATIONS, Context.MODE_PRIVATE);
     SharedPreferences.Editor editor = sharedPreferences.edit();
+    Log.d("flutter_local_not", "&&&&&&&&&&&&&&&&&&&&&&&&&&& Saving " + scheduledNotifications.size() + " items");
     editor.putString(SCHEDULED_NOTIFICATIONS, json);
     tryCommittingInBackground(editor, 3);
   }
@@ -408,12 +410,16 @@ public class FlutterLocalNotificationsPlugin
   private static void tryCommittingInBackground(
       final SharedPreferences.Editor editor, final int tries) {
     if (tries == 0) {
+      Log.d("flutter_local_not", "!&&&&&&&&&&&&&&&&&&&&&&&&&&& Gave up");
       return;
+    } else {
+      Log.d("flutter_local_not", "!&&&&&&&&&&&&&&&&&&&&&&&&&&& Doing " + tries + " tries");
     }
     new Thread(
             new Runnable() {
               @Override
               public void run() {
+                Log.d("flutter_local_not", "!&&&&&&&&&&&&&&&&&&&&&&&&&&& Running");
                 final boolean isCommitted = editor.commit();
                 if (!isCommitted) {
                   tryCommittingInBackground(editor, tries - 1);
