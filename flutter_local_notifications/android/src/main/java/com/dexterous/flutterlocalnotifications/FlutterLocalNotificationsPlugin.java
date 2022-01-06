@@ -402,7 +402,9 @@ public class FlutterLocalNotificationsPlugin
     SharedPreferences sharedPreferences =
         context.getSharedPreferences(SCHEDULED_NOTIFICATIONS, Context.MODE_PRIVATE);
     SharedPreferences.Editor editor = sharedPreferences.edit();
-    Log.d("flutter_local_not", "&&&&&&&&&&&&&&&&&&&&&&&&&&& Saving " + scheduledNotifications.size() + " items");
+    Log.d(
+        "flutter_local_not",
+        "&&&&&&&&&&&&&&&&&&&&&&&&&&& Saving " + scheduledNotifications.size() + " items");
     editor.putString(SCHEDULED_NOTIFICATIONS, json);
     tryCommittingInBackground(editor, 3);
   }
