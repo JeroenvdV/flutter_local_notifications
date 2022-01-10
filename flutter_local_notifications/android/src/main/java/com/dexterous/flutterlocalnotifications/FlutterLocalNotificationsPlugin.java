@@ -419,17 +419,17 @@ public class FlutterLocalNotificationsPlugin
     if (!isCommitted) {
       tryCommittingInBackground(editor, tries - 1);
     }
-//    new Thread(
-//            new Runnable() {
-//              @Override
-//              public void run() {
-//                final boolean isCommitted = editor.commit();
-//                if (!isCommitted) {
-//                  tryCommittingInBackground(editor, tries - 1);
-//                }
-//              }
-//            })
-//        .start();
+    //    new Thread(
+    //            new Runnable() {
+    //              @Override
+    //              public void run() {
+    //                final boolean isCommitted = editor.commit();
+    //                if (!isCommitted) {
+    //                  tryCommittingInBackground(editor, tries - 1);
+    //                }
+    //              }
+    //            })
+    //        .start();
   }
 
   static void removeNotificationFromCache(Context context, Integer notificationId) {
@@ -480,7 +480,9 @@ public class FlutterLocalNotificationsPlugin
           pendingIntent);
     }
 
-    Log.d("flutter_local_not", "!&&&&&&&&&&&&&&&&&&&&&&&&&&& scheduleNotification, " + updateScheduledNotificationsCache);
+    Log.d(
+        "flutter_local_not",
+        "!&&&&&&&&&&&&&&&&&&&&&&&&&&& scheduleNotification, " + updateScheduledNotificationsCache);
 
     if (updateScheduledNotificationsCache) {
       saveScheduledNotification(context, notificationDetails);
@@ -516,7 +518,10 @@ public class FlutterLocalNotificationsPlugin
       AlarmManagerCompat.setExact(alarmManager, AlarmManager.RTC_WAKEUP, epochMilli, pendingIntent);
     }
 
-    Log.d("flutter_local_not", "!&&&&&&&&&&&&&&&&&&&&&&&&&&& zonedScheduleNotification, " + updateScheduledNotificationsCache);
+    Log.d(
+        "flutter_local_not",
+        "!&&&&&&&&&&&&&&&&&&&&&&&&&&& zonedScheduleNotification, "
+            + updateScheduledNotificationsCache);
 
     if (updateScheduledNotificationsCache) {
       saveScheduledNotification(context, notificationDetails);
@@ -598,7 +603,10 @@ public class FlutterLocalNotificationsPlugin
           AlarmManager.RTC_WAKEUP, notificationTriggerTime, repeatInterval, pendingIntent);
     }
 
-    Log.d("flutter_local_not", "!&&&&&&&&&&&&&&&&&&&&&&&&&&& scheduleNextRepeatingNotification, " + updateScheduledNotificationsCache);
+    Log.d(
+        "flutter_local_not",
+        "!&&&&&&&&&&&&&&&&&&&&&&&&&&& scheduleNextRepeatingNotification, "
+            + updateScheduledNotificationsCache);
 
     if (updateScheduledNotificationsCache) {
       saveScheduledNotification(context, notificationDetails);
