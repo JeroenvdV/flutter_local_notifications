@@ -414,21 +414,22 @@ public class FlutterLocalNotificationsPlugin
     if (tries == 0) {
       Log.d("flutter_local_not", "!&&&&&&&&&&&&&&&&&&&&&&&&&&& Gave up");
       return;
-    } else {
-      Log.d("flutter_local_not", "!&&&&&&&&&&&&&&&&&&&&&&&&&&& Doing " + tries + " tries");
     }
-    new Thread(
-            new Runnable() {
-              @Override
-              public void run() {
-                Log.d("flutter_local_not", "!&&&&&&&&&&&&&&&&&&&&&&&&&&& Running");
-                final boolean isCommitted = editor.commit();
-                if (!isCommitted) {
-                  tryCommittingInBackground(editor, tries - 1);
-                }
-              }
-            })
-        .start();
+    final boolean isCommitted = editor.commit();
+    if (!isCommitted) {
+      tryCommittingInBackground(editor, tries - 1);
+    }
+//    new Thread(
+//            new Runnable() {
+//              @Override
+//              public void run() {
+//                final boolean isCommitted = editor.commit();
+//                if (!isCommitted) {
+//                  tryCommittingInBackground(editor, tries - 1);
+//                }
+//              }
+//            })
+//        .start();
   }
 
   static void removeNotificationFromCache(Context context, Integer notificationId) {
